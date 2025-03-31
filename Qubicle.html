@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qubicle – A Cube of Quotes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Qubicle</h1>
+    <p class="subtitle">A cube of quotes waiting to be unlocked</p>
+    <div id="quote-box">
+      <p id="quote">"Click the button to unlock a quote!"</p>
+      <p id="author">- Unknown</p>
+    </div>
+    <button id="generate-quote">🔓 Unlock a Quote</button>
+  </div>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      color: #333;
+    }
+
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #7f8c8d;
+      margin-bottom: 25px;
+    }
+
+    #quote-box {
+      margin: 20px 0;
+      padding: 20px;
+      background: #ecf0f1;
+      border-radius: 10px;
+      box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #quote {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #34495e;
+      margin-bottom: 10px;
+    }
+
+    #author {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #7f8c8d;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      background: #3498db;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+  </style>
+
+  <script>
+    const quotes = [
+      { text: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+      { text: "Life is what happens when you're busy making other plans.", author: "John Lennon" },
+      { text: "Get busy living or get busy dying.", author: "Stephen King" },
+      { text: "You only live once, but if you do it right, once is enough.", author: "Mae West" },
+      { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+      { text: "Success usually comes to those who are too busy to be looking for it.", author: "Henry David Thoreau" },
+      { text: "Don’t be afraid to give up the good to go for the great.", author: "John D. Rockefeller" },
+      { text: "Opportunities don't happen. You create them.", author: "Chris Grosser" },
+      { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+      { text: "Happiness is not something ready made. It comes from your own actions.", author: "Dalai Lama" },
+      { text: "What you get by achieving your goals is not as important as what you become by achieving your goals.", author: "Zig Ziglar" },
+      { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+      { text: "Dream big and dare to fail.", author: "Norman Vaughan" },
+      { text: "You miss 100% of the shots you don’t take.", author: "Wayne Gretzky" },
+      { text: "Do not wait to strike till the iron is hot; but make it hot by striking.", author: "William Butler Yeats" },
+      { text: "Great things are done by a series of small things brought together.", author: "Vincent Van Gogh" },
+      { text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.", author: "Ralph Waldo Emerson" },
+      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "The mind is everything. What you think you become.", author: "Buddha" },
+      { text: "An unexamined life is not worth living.", author: "Socrates" },
+      { text: "Eighty percent of success is showing up.", author: "Woody Allen" },
+      { text: "Your time is limited, so don’t waste it living someone else’s life.", author: "Steve Jobs" },
+      { text: "Winning isn’t everything, but wanting to win is.", author: "Vince Lombardi" },
+      { text: "I am not a product of my circumstances. I am a product of my decisions.", author: "Stephen Covey" },
+      { text: "Every child is an artist. The problem is how to remain an artist once he grows up.", author: "Pablo Picasso" },
+      { text: "You can never cross the ocean until you have the courage to lose sight of the shore.", author: "Christopher Columbus" },
+      { text: "Either you run the day, or the day runs you.", author: "Jim Rohn" },
+      { text: "Whether you think you can or you think you can’t, you’re right.", author: "Henry Ford" },
+      { text: "The two most important days in your life are the day you are born and the day you find out why.", author: "Mark Twain" },
+      { text: "Whatever you are, be a good one.", author: "Abraham Lincoln" },
+      { text: "If you’re going through hell, keep going.", author: "Winston Churchill" },
+      { text: "You can’t use up creativity. The more you use, the more you have.", author: "Maya Angelou" },
+      { text: "Be yourself; everyone else is already taken.", author: "Oscar Wilde" },
+      { text: "A room without books is like a body without a soul.", author: "Marcus Tullius Cicero" },
+      { text: "In three words I can sum up everything I've learned about life: it goes on.", author: "Robert Frost" },
+      { text: "If you tell the truth, you don't have to remember anything.", author: "Mark Twain" },
+      { text: "Always forgive your enemies; nothing annoys them so much.", author: "Oscar Wilde" },
+      { text: "To live is the rarest thing in the world. Most people exist, that is all.", author: "Oscar Wilde" },
+      { text: "It is never too late to be what you might have been.", author: "George Eliot" },
+      { text: "Not all those who wander are lost.", author: "J.R.R. Tolkien" },
+      { text: "The only impossible journey is the one you never begin.", author: "Tony Robbins" },
+      { text: "The journey of a thousand miles begins with one step.", author: "Lao Tzu" },
+      { text: "Act as if what you do makes a difference. It does.", author: "William James" },
+      { text: "The only limit to our realization of tomorrow will be our doubts of today.", author: "Franklin D. Roosevelt" },
+      { text: "Life is 10% what happens to us and 90% how we react to it.", author: "Charles R. Swindoll" },
+      { text: "Do what you feel in your heart to be right—for you’ll be criticized anyway.", author: "Eleanor Roosevelt" },
+      { text: "Happiness depends upon ourselves.", author: "Aristotle" }
+    ];
+
+    function generateQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      const quote = quotes[randomIndex];
+ document.getElementById("quote").textContent = quote.text;
+document.getElementById("author").textContent = `- ${quote.author}`;
+    }
+
+    document.getElementById("generate-quote").addEventListener("click", generateQuote);
+  </script>
+</body>
+</html>
